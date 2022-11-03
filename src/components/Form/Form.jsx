@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid';
 import css from './Form.module.css';
-import { useState, useEffect } from 'react';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 export function FormPhone({ onSubmit }) {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [name, setName] = useLocalStorage('name', '');
+  const [number, setNumber] = useLocalStorage('number', '');
 
   const handelChange = event => {
     const { name, value } = event.currentTarget;
@@ -21,14 +21,6 @@ export function FormPhone({ onSubmit }) {
         return;
     }
   };
-
-  useEffect(() => {
-    window.localStorage.setItem('name', JSON.stringify(name));
-  }, [name]);
-
-  useEffect(() => {
-    window.localStorage.setItem('number', JSON.stringify(number));
-  }, [number]);
 
   const onSubmitnForm = event => {
     event.preventDefault();
